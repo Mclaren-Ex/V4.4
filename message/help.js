@@ -297,6 +297,7 @@ exports.fitur = (prefix) => {
 ┇*${sign} cecan-japan*
 ┇*${sign} cecan-korea*
 ┇*${sign} cecan-thai*
+┇*${sign} cecan-mal*
 ┇*${sign} blackpink*
 ┗─────────────❐
 

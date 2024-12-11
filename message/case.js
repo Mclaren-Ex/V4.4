@@ -6606,7 +6606,7 @@ case 'cecan-indo': {
         // Send the image
         await conn.sendMessage(m.chat, {
             image: imageBuffer,
-            caption: `🌸 Here's a random Indonesian Cecan image for you!`,
+            caption: `🌸 Here's a random Indonesian Cecan image for you!\n> ${caption}`,
         }, { quoted: m });
     } catch (error) {
         console.error("Error in cecan case:", error);
@@ -6631,7 +6631,7 @@ case 'cecan-china': {
         // Send the image
         await conn.sendMessage(m.chat, {
             image: imageBuffer,
-            caption: `🌸 Here's a random Chinese Cecan image for you!`,
+            caption: `🌸 Here's a random Chinese Cecan image for you!\n> ${caption}`,
         }, { quoted: m });
     } catch (error) {
         console.error("Error in cecanchina case:", error);
@@ -6656,7 +6656,7 @@ case 'cecan-japan': {
         // Send the image
         await conn.sendMessage(m.chat, {
             image: imageBuffer,
-            caption: `🎌 Here's a random Japanese Cecan image for you!`,
+            caption: `🎌 Here's a random Japanese Cecan image for you!\n> ${caption}`,
         }, { quoted: m });
     } catch (error) {
         console.error("Error in cecanjapan case:", error);
@@ -6681,7 +6681,7 @@ case 'cecan-korea': {
         // Send the image
         await conn.sendMessage(m.chat, {
             image: imageBuffer,
-            caption: `🇰🇷 Here's a random Korean Cecan image for you!`,
+            caption: `🇰🇷 Here's a random Korean Cecan image for you!\n> ${caption}`,
         }, { quoted: m });
     } catch (error) {
         console.error("Error in cecankorea case:", error);
@@ -6706,7 +6706,7 @@ case 'cecan-thai': {
         // Send the image
         await conn.sendMessage(m.chat, {
             image: imageBuffer,
-            caption: `🇹🇭 Here's a random Thai Cecan image for you!`,
+            caption: `🇹🇭 Here's a random Thai Cecan image for you!\n> ${caption}`,
         }, { quoted: m });
     } catch (error) {
         console.error("Error in cecanThailand case:", error);
@@ -6714,7 +6714,29 @@ case 'cecan-thai': {
     }
     break;
 }
-case 'update-case': {
+case 'cecan-mal': {
+    try {
+        await loading();
+
+        const apiUrl = 'https://api.agatz.xyz/api/malaysia';
+        const response = await fetch(apiUrl);
+        const res = await response.json();
+
+        if (res.status !== 200 || !res.data?.url) {
+            return setReply("Failed to fetch the Cecan image. Please try again later.");
+        }
+
+        await conn.sendMessage(from, {
+            image: { url: res.data.url },
+            caption: `*Here is a Cecan from Malaysia 🇲🇾*\n> ${caption}`,
+        }, { quoted: m });
+    } catch (error) {
+        console.error("Error in Cecan Malaysia case:", error);
+        setReply("An error occurred while fetching the Cecan image. Please try again later.");
+    }
+    break;
+}
+case 'update-case.js': {
     if (!isOwner) return reply(mess.only.owner);
     await loading();
 
@@ -6746,9 +6768,42 @@ case 'update-case': {
 
     break;
 }
+case 'update-help.js': {
+    if (!isOwner) return reply(mess.only.owner);
+    await loading();
 
+    reply("*𝐔𝐏𝐃𝐀𝐓𝐈𝐍𝐆.....*");
 
+    const fileToUpdate = {
+        url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/help.js',
+        path: './message/help.js',
+        name: 'help.js'
+    };
 
+    try {
+        const fs = require('fs');
+
+        const response = await fetch(fileToUpdate.url);
+        if (!response.ok) {
+            return reply(`Failed to update *${fileToUpdate.name}*. Server responded with ${response.status}.`);
+        }
+
+        const newContent = await response.text();
+        fs.writeFileSync(fileToUpdate.path, newContent, 'utf8');
+        reply(`*${fileToUpdate.name}* successfully updated.`);
+        await sleep(700);
+        reply('𝐔𝐏𝐃𝐀𝐓𝐄 𝐏𝐑𝐎𝐂𝐄𝐒𝐒 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐄.');
+    } catch (error) {
+        console.error("Error during update:", error);
+        reply("Failed to update the file. Please check the console for errors.");
+    }
+
+    break;
+}
+case 'update': {
+    setReply(` 『 \`𝐔𝐏𝐃𝐀𝐓𝐄 𝐂𝐌𝐃𝐒\` 』\n${sign} 𝚄𝚙𝚍𝚊𝚝𝚎-𝙲𝚊𝚜𝚎.𝚓𝚜\n${sign} 𝚄𝚙𝚍𝚊𝚝𝚎-𝙷𝚎𝚕𝚙.𝚓𝚜`);
+    break;
+}
 
 
 
