@@ -4218,57 +4218,7 @@ case 'songs': {
                     }
                     break;
                 }
-                case 'update': {
-                    if (!isOwner) return reply(mess.only.owner);
-                    await loading();
-
-                    reply("*𝐔𝐏𝐃𝐀𝐓𝐈𝐍𝐆.....*");
-
-                    const filesToUpdate = [{
-                            url: 'https://raw.githubusercontent.com/BLUEXDEMONl/BLUEXDEMON-V4/refs/heads/master/message/case.js',
-                            path: './message/case.js',
-                            name: 'case.js'
-                        },
-                        {
-                            url: 'https://raw.githubusercontent.com/BLUEXDEMONl/BLUEXDEMON-V4/refs/heads/master/message/help.js',
-                            path: './message/help.js',
-                            name: 'help.js'
-                        },
-                        {
-                            url: 'https://raw.githubusercontent.com/BLUEXDEMONl/BLUEXDEMON-V4/refs/heads/master/message/message.js',
-                            path: './message/message.js',
-                            name: 'message.js'
-                        },
-                        {
-                            url: 'https://raw.githubusercontent.com/BLUEXDEMONl/BLUEXDEMON-V4/refs/heads/master/temp/audio/autovn.js',
-                            path: './temp/audio/autovn.js',
-                            name: 'autovn.js'
-                        }
-                    ];
-
-                    try {
-                        const fs = require('fs');
-
-                        for (const file of filesToUpdate) {
-                            const response = await fetch(file.url);
-                            if (!response.ok) {
-                                reply(`Failed to update *${file.name}*. Server responded with ${response.status}.`);
-                                continue;
-                            }
-
-                            const newContent = await response.text();
-                            fs.writeFileSync(file.path, newContent, 'utf8');
-                            reply(`*${file.name}* successfully updated.`);
-                        }
-                        await sleep(700)
-                        reply('𝐔𝐏𝐃𝐀𝐓𝐄 𝐏𝐑𝐎𝐂𝐄𝐒𝐒 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐄.');
-                    } catch (error) {
-                        console.error("Error during update:", error);
-                        reply("Failed to update files. Please check the console for errors.");
-                    }
-
-                    break;
-                }
+                
                 case 'hrt':
                 case 'love': {
 
@@ -6764,7 +6714,38 @@ case 'cecan-thai': {
     }
     break;
 }
+case 'update-case': {
+    if (!isOwner) return reply(mess.only.owner);
+    await loading();
 
+    reply("*𝐔𝐏𝐃𝐀𝐓𝐈𝐍𝐆.....*");
+
+    const fileToUpdate = {
+        url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/case.js',
+        path: './message/case.js',
+        name: 'case.js'
+    };
+
+    try {
+        const fs = require('fs');
+
+        const response = await fetch(fileToUpdate.url);
+        if (!response.ok) {
+            return reply(`Failed to update *${fileToUpdate.name}*. Server responded with ${response.status}.`);
+        }
+
+        const newContent = await response.text();
+        fs.writeFileSync(fileToUpdate.path, newContent, 'utf8');
+        reply(`*${fileToUpdate.name}* successfully updated.`);
+        await sleep(700);
+        reply('𝐔𝐏𝐃𝐀𝐓𝐄 𝐏𝐑𝐎𝐂𝐄𝐒𝐒 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐄.');
+    } catch (error) {
+        console.error("Error during update:", error);
+        reply("Failed to update the file. Please check the console for errors.");
+    }
+
+    break;
+}
 
 
 
