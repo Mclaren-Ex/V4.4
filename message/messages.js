@@ -11,5 +11,5 @@ exports.bad = [
     "cockhead", "testicles", "cuntface", "twat", "prick", "assclown", "asswipe", "asslick", 
     "nutbag", "pussyhole", "rimming", "sodomy", "toilet", "fisting", "panty", "boobs", 
     "pecker", "ballz", "pussylicker", "pissface", "shitter", "spunk", "bukkake", "faggy", 
-    "cocktease", "lesbo", "hoe", "shemale", "tranny", "zebra", "dyke", "bastad", "balllicker"
+    "cocktease", "lesbo", "hoe", "shemale", "tranny", "zebra", "dyke", "bastad", "balllicker", "cumshot"
 ];

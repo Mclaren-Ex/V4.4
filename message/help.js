@@ -128,6 +128,7 @@ exports.fitur = (prefix) => {
 ┇*${sign} restart*
 ┇*${sign} owner*
 ┇*${sign} clearchat*
+┇*${sign} antidelete*
 ┇*${sign} setbotname*
 ┗─────────────❐
 
@@ -149,7 +150,6 @@ exports.fitur = (prefix) => {
 ┇*${sign} revoke*
 ┇*${sign} antilink*
 ┇*${sign} antivirtex*
-┇*${sign} antidelete*
 ┇*${sign} antibot*
 ┇*${sign} unmute*
 ┇*${sign} revoke*
@@ -171,6 +171,7 @@ exports.fitur = (prefix) => {
 ┏─『 \`𝐌𝐄𝐃𝐈𝐀 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐒\` 』
 ┇*${sign} play*
 ┇*${sign} song*
+┇*${sign} sound1 to 95*
 ┇*${sign} yts <link>*
 ┇*${sign} ytmp3 <link>*
 ┇*${sign} ytmp4 <link>*
@@ -255,10 +256,6 @@ exports.fitur = (prefix) => {
 
 ┏─『 \`𝐎𝐓𝐇𝐄𝐑 𝐌𝐄𝐍𝐔\` 』
 ┇*${sign} anticall*
-┇*${sign} alwaysonline*
-┇*${sign} autotyping*
-┇*${sign} autoreadchat*
-┇*${sign} autoviewstatus*
 ┇*${sign} listcase*
 ┇*${sign} alive*
 ┇*${sign} scan*
@@ -271,9 +268,13 @@ exports.fitur = (prefix) => {
 ┇*${sign} checkip*
 ┇*${sign} broadcast*
 ┇*${sign} exchange*
+┇*${sign} alwaysonline*
+┇*${sign} autotyping*
+┇*${sign} autoreadchat*
 ┇*${sign} randomcolor*
 ┇*${sign} getsession*
 ┇*${sign} checkcolor*
+┇*${sign} autoviewstatus*
 ┗─────────────❐
 
 ┏─『 \`𝐍𝐒𝐅𝐖 𝐌𝐄𝐍𝐔\` 』

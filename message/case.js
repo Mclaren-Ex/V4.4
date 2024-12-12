@@ -268,7 +268,7 @@ module.exports = async (conn, dev, chatUpdate, store) => {
     //console.log(chatUpdate.messages)
     var multi = db.data.settings['settingbot'].multi
     const m = dev
-    var Ownerin = "@s.whatsapp.net"
+    var Ownerin = "2349019529423@s.whatsapp.net"
     var ownerNumber = [`${botNumber}@s.whatsapp.net`, `2347041039367@s.whatsapp.net`, `${conn.user.jid}`]
     const Tnow = (new Date() / 1000).toFixed(0)
     const seli = Tnow - m.messageTimestamp.low
@@ -306,6 +306,9 @@ module.exports = async (conn, dev, chatUpdate, store) => {
         }
         const isCmd = body.startsWith(prefix)
         const isCommand = isCmd ? body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase() : ""
+        const isCommandx = body.startsWith(prefix) 
+    ? body.replace(prefix, '').trim().split(/ +/).shift().toLowerCase() 
+    : body.trim().split(/ +/).shift().toLowerCase();
         const q = args.join(' ')
         const timeWib = moment().tz('Africa/Lagos').format('HH:mm:ss')
         const isOwner = ownerNumber.includes(sender) || checkDataId("owner", sender, DataId)
@@ -325,6 +328,7 @@ module.exports = async (conn, dev, chatUpdate, store) => {
         //const Input = mentionByTag[0]? mentionByTag[0] : mentionByReply ? mentionByReply : q? numberQuery : false
         const replyCommand = isCmd ? isCmd : allcommand.includes(toFirstCase(command))
         const selectedButton = (type == 'buttonsResponseMessage') ? dev.message.buttonsResponseMessage.selectedButtonId : ''
+        const isBanned = sender ? cekBannedUser(senderNumber, ban) : false
         const isMessage =
             m.message.conversation ||
             m.message.extendedTextMessage?.text ||
@@ -379,9 +383,8 @@ module.exports = async (conn, dev, chatUpdate, store) => {
             month: 'long',
             year: 'numeric'
         })
-
-
-        function clockString(ms) {
+// Check if the sender is banned and if the message is a command
+       function clockString(ms) {
             let d = isNaN(ms) ? '--' : Math.floor(ms / 86400000)
             let h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24
             let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
@@ -537,7 +540,6 @@ module.exports = async (conn, dev, chatUpdate, store) => {
         const isAntiVirtex = isGroup ? db.data.chats[from].antivirtex : false
         const isAntiWame = isGroup ? db.data.chats[from].antiwame : false
         const isAntiToxic = isGroup ? db.data.chats[from].antitoxic : false
-        const isBanned = sender ? cekBannedUser(senderNumber, ban) : false
         const isPremium = isOwner ? true : _prem.checkPremiumUser(sender, premium)
         const gcount = isPremium ? gcounti.prem : gcounti.user
         const isAntiViewOnce = isGroup ? db.data.chats[from].viewonce : false
@@ -758,33 +760,6 @@ if (isGroup && isCmd) {
                 }
             }
         }
-        const vnme = vnMenu
-const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
-        const fsimi = {
-            key: {
-                fromMe: false,
-                participant: `0@s.whatsapp.net`,
-                ...(from ? {
-                    remoteJid: "status@broadcast"
-                } : {})
-            },
-            message: {
-                "imageMessage": {
-                    "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc",
-                    "mimetype": "image/jpeg",
-                    "caption": 'simi botz',
-                    "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=",
-                    "fileLength": "28777",
-                    "height": 1080,
-                    "width": 1079,
-                    "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=",
-                    "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=",
-                    "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69",
-                    "mediaKeyTimestamp": "1610993486",
-                    "scansSidecar": "1W0XhfaAcDwc7xh1R8lca6Qg/1bB4naFCSngM2LKO2NoP5RI7K+zLw=="
-                }
-            }
-        }
         //SetReply
         const setReply = async (teks, member = []) => {
             let photo = pickRandom(fotoRandom)
@@ -851,7 +826,7 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
             } else if (replyType === "document") {
                 conn.sendMessage(m.chat, {
                     document: fs.readFileSync("./package.json"),
-                    fileName: '© Rangelofficial',
+                    fileName: '© Blue-demon',
                     mimetype: "application/vnd.ms-excel",
                     fileLength: 999999999,
                     bpageCount: 10903,
@@ -864,7 +839,7 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
                         externalAdReply: {
                             showAdAttribution: false,
                             title: botName,
-                            body: `${ucapanWaktu} kak ${pushname}`,
+                            body: `${ucapanWaktu} ${pushname}`,
                             thumbnailUrl: photo,
                             mediaType: 1,
                             sourceUrl: `${web}`,
@@ -911,40 +886,39 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
                 quoted: m
             })
         }
-        const sendMusic = (teks) => {
-            let img = {
-                url: pickRandom(fotoRandom),
-                type: "image/jpeg"
-            }
-            let url = `https://whatsapp.com/channel/0029Vah3fKtCnA7oMPTPJm1h`
-
-            let contextInfo = {
-                externalAdReply: {
-                    showAdAttribution: true,
-                    title: `⇆ㅤ ||◁ㅤ❚❚ㅤ▷||ㅤ ↻`,
-                    body: `   ━━━━⬤──────────    klik `,
-                    description: 'Now Playing ....',
-                    mediaType: 2,
-                    thumbnailUrl: img.url,
-                    mediaUrl: url
-                }
-            }
-
-            conn.sendMessage(from, {
-                contextInfo,
-                mimetype: 'audio/mp4',
-                audio: teks
-            }, {
-                quoted: m
-            })
-        }
         // publik & Self And Banchat
         if (!publik && !isOwner) return; // Ignore non-owner commands in self mode
 
         const pickRandom = (arr) => {
             return arr[Math.floor(Math.random() * arr.length)]
         }
-
+  const vnme = vnMenu
+const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
+        const fsimi = {
+            key: {
+                fromMe: false,
+                participant: `0@s.whatsapp.net`,
+                ...(from ? {
+                    remoteJid: "status@broadcast"
+                } : {})
+            },
+            message: {
+                "imageMessage": {
+                    "url": "https://mmg.whatsapp.net/d/f/At0x7ZdIvuicfjlf9oWS6A3AR9XPh0P-hZIVPLsI70nM.enc",
+                    "mimetype": "image/jpeg",
+                    "caption": 'simi botz',
+                    "fileSha256": "+Ia+Dwib70Y1CWRMAP9QLJKjIJt54fKycOfB2OEZbTU=",
+                    "fileLength": "28777",
+                    "height": 1080,
+                    "width": 1079,
+                    "mediaKey": "vXmRR7ZUeDWjXy5iQk17TrowBzuwRya0errAFnXxbGc=",
+                    "fileEncSha256": "sR9D2RS5JSifw49HeBADguI23fWDz1aZu4faWG/CyRY=",
+                    "directPath": "/v/t62.7118-24/21427642_840952686474581_572788076332761430_n.enc?oh=3f57c1ba2fcab95f2c0bb475d72720ba&oe=602F3D69",
+                    "mediaKeyTimestamp": "1610993486",
+                    "scansSidecar": "1W0XhfaAcDwc7xh1R8lca6Qg/1bB4naFCSngM2LKO2NoP5RI7K+zLw=="
+                }
+            }
+        }
         const mentions = (teks, memberr, id) => {
             (id == null || id == undefined || id == false) ? conn.sendMessage(from, {
                 text: teks,
@@ -975,17 +949,6 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
             })
         };
 
-        //FUNCTION ONLY
-        /*/Bot tidak bisa di akses di pc kecuali premium
-        if(!isGroup && !isPremium && isCmd) {
-        let teks = `Kamu bukan user premium
-        silahkan upgrade ke premium agar bisa menggunakan 
-        bot secara private chat\n\n${sgc}
-        `
-        return conn.sendMessage(from,{text: teks})
-        }*/
-        //user pc
-
         //AUTO BLOCK CMD
         for (let i = 0; i < listcmdblock.length; i++) {
             if (command === listcmdblock[i].cmd) {
@@ -994,45 +957,6 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
                 } else {
                     return setReply(mess.block.Bowner)
                 }
-            }
-        }
-
-        //FITUR USER PREMIUM
-        if (!checkDataName("premium", "", DataId)) {
-            await createDataId("premium", DataId)
-        }
-        let userPremium = DataId.filter(item => item.name == "premium")
-        for (let i of userPremium[0].id) {
-            if (command == i && !isPremium) return setReply(`Kamu bukan user premium`)
-        }
-
-        //FITUR KHUSUS OWNER
-        if (!checkDataName("commands", "", DataId)) {
-            await createDataId("commands", DataId)
-
-        }
-        let ownerCommands = DataId.filter(item => item.name == "commands")
-        for (let i of ownerCommands[0].id) {
-            if (command == i && !isOwner) return setReply(mess.only.owner)
-        }
-
-        //FITUR USER LIMIT
-        if (!checkDataName("limit", "", DataId)) {
-            await createDataId("limit", DataId)
-        }
-        let userLimit = DataId.filter(item => item.name == "limit")
-        for (let i of userLimit[0].id) {
-            if (!isOwner && command == i) {
-                if (!isPremium && db.data.users[sender].limit < 1) return reply(`Your limit has been used up, please send ${prefix}limit to check the limit.`)
-                if (!isPremium) {
-                    db.data.users[sender].limit -= 1
-                    conn.sendMessage(from, {
-                        text: `*\`Your remaining limit ${db.data.users[sender].limit}\`*`
-                    }, {
-                        quoted: dev
-                    })
-                }
-
             }
         }
         //××××××××××××××××{××××//
@@ -1126,65 +1050,7 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
             return setReply("`YOO,STOP SPAMMING CMD`")
         }
         if (isCmd && !isOwner) msgFilter.addFilter(from)
-
-        //Auto level users
-        if (user && isCmd && userExp >= requiredExp) {
-            //const { userXp, userLeveling, } = (await import("../lib/user.js"))
-            let link = 'https://telegra.ph/file/9528a0b81d1b46bdb5507.jpg'
-            let level = userLevel + 1
-            let uang = 1000 * level
-
-            db.data.users[m, sender].exp = userExp - requiredExp
-            db.data.users[m.sender].level += 1
-            db.data.users[m.sender].money += 1000 * level
-            //db.data,user[m.sender].grade = userLeveling(`${db.data.users[sender].level + 1}`)
-
-            let contextInfo = {
-                externalAdReply: {
-                    showAdAttribution: false,
-                    mediaType: 1,
-                    title: 'Exp',
-                    thumbnailUrl: link,
-                    renderLargerThumbnail: true,
-                    mediaUrl: 'https://chat.whatsapp.com/GsX10XuzZqQ99jccdcDasi',
-                    sourceId: botName,
-                    sourceUrl: 'https://chat.whatsapp.com/GsX10XuzZqQ99jccdcDasi'
-                }
-            }
-            let mentions = [sender]
-            let text = Ehztext(`◪ *Nama:* ${pushname}
-├◆ *Pangkat:* ${userLeveling(`${db.data.users[sender].level + 1}`)}
-├◆ *Saldo:* + Rp ${uang.toLocaleString()}
-╰◆ *Level:*  ${userLevel} ➠ ${userLevel + 1}
-
-*Note:* ↓
-Gunakan saldo untuk membeli limit tambahan
-dengan fitur ${prefix}buylimit`)
-            //conn.sendMessage(from,{contextInfo, text,mentions})
-            setReply(text)
-        }
-        //USER AFK
-        if (user && user.afk > -1) {
-
-            setReply(`${pushname}, Kamu telah berhenti AFK${user.afkReason ? ' setelah ' + user.afkReason : ''}
-Selama ${clockString(new Date - user.afk)}`.trim())
-            user.afk = -1
-            user.afkReason = ''
-        }
-        let jids = [...new Set([...(m.mentionedJid || []), ...(m.quoted ? [m.quoted.sender] : [])])]
-        for (let jid of jids) {
-            const nama = await conn.getName(jid)
-            let userAfk = global.db.data.users[jid]
-            if (!userAfk) continue
-            let afkTime = userAfk.afk
-            if (!afkTime || afkTime < 0) continue
-            let reason = userAfk.afkReason || ''
-            setReply(`
-Jangan tag dia!
-*${nama}* sedang AFK ${reason ? 'dengan alasan ' + reason : 'tanpa alasan'}
-Selama ${clockString(new Date - afkTime)}
-`.trim())
-        }
+ 
         //Auto Sticker Online
         if (db.data.sticker[budy]) {
             if (cekSpam("NotCase", senderNumber, AntiSpam)) return
@@ -1388,13 +1254,23 @@ Maaf kak @${sender.split('@')[0]} limit kamu sudah habis!`
         if (global.autoreact && isMessage) {
             try {
                 // Define an array of emojis
-                const emojis = [
-                    "😊", "👍", "😂", "🥶", "😵",
-                    "😘", "😑", "🐥", "💱", "🤤",
-                    "😼", "🙄", "☹️", "😲", "🤢",
-                    "🥵", "😤"
-                ];
-
+const emojis = [
+    "😊", "👍", "😂", "🥶", "😵",
+    "😘", "😑", "😤", "😍", "😎", 
+    "😋", "🤗", "🥰", "😜", "😌", 
+    "😬", "🙃", "😈", "😏", "🥳", 
+    "🤩", "😅", "🤭", "😷", "😴", 
+    "🤔", "😮", "😬", "😪", "😅", 
+    "😓", "😤", "🥺", "🤐", "😔", 
+    "😞", "😳", "😜", "😝", "🥶", 
+    "😇", "🙄", "😡", "😬", "🤧", 
+    "😩", "😏", "😶", "😳", "😋", 
+    "😌", "😆", "🤭", "🤩", "😺",
+    "😶‍🌫️", "😤", "🤯", "😱", "🥵", 
+    "😶", "😕", "🤑", "🤒", "🤧", 
+    "🤮", "🤫", "🥸", "😧", "😞",
+    "🫣", "🥱", "🤐", "😮‍💨", "🤠"
+];
                 // Function to pick a random emoji
                 const getRandomEmoji = () => emojis[Math.floor(Math.random() * emojis.length)];
 
@@ -1756,10 +1632,32 @@ dan juga sudah di tandai sebagai user biadap`
                 if (isBotGroupAdmins) conn.groupParticipantsUpdate(from, [sender], 'remove')
             }
         }
+if (type === 'protocolMessage' && global.antidelete) {
+    let mess = chatUpdate.messages[0].message.protocolMessage;
 
+    try {
+        // Extract the chat and message details
+        let chats = Object.entries(await conn.chats).find(([user, data]) => 
+            data.messages && data.messages[mess.key.id]
+        );
 
+        if (chats && chats[1] !== undefined) {
+            let msg = JSON.parse(JSON.stringify(chats[1].messages[mess.key.id]));
 
+            // Prepare the info about where the message was deleted
+            let info = `🛑 *Deleted Message Detected*\n\n` +
+                       `📍 *Chat/Group Name:* ${chats[1]?.metadata?.subject || "Private Chat"}\n` +
+                       `👤 *Sender:* ${msg.pushName || "Unknown"}\n` +
+   ` > ${caption}`;
 
+            // Forward the deleted message to botNumber
+            await conn.sendMessage(botNumber, { text: info });
+            await conn.copyNForward(botNumber, msg).catch(e => console.log(e, msg));
+        }
+    } catch (error) {
+        console.error("Error handling anti-delete:", error);
+    }
+}
         //ANTI LINK 
         if (isGroup && isAntiLink) {
             if (budy.includes(`https:`)) {
@@ -1829,27 +1727,6 @@ dan juga sudah di tandai sebagai user biadap`
                 })
             }
         }
-
-        // ANTI TOXIC
-
-
-
-
-        //ANTI DELETE
-        if (type == 'protocolMessage' && isAntidelete) {
-            let mess = chatUpdate.messages[0].message.protocolMessage
-            let chats = Object.entries(await conn.chats).find(([user, data]) => data.messages && data.messages[mess.key.id])
-            if (chats[1] !== undefined) {
-                let msg = JSON.parse(JSON.stringify(chats[1].messages[mess.key.id]))
-                await conn.copyNForward(mess.key.remoteJid, msg).catch(e => console.log(e, msg))
-            }
-        }
-
-        //====================================//
-
-
-
-
         // Secreto
         if (!isGroup) {
             if (!dev.key.fromMe && secreto.find(i => i.sender === sender)) {
@@ -2370,7 +2247,21 @@ ${isWin ? `@${winner.split('@')[0]} *MENANG!*` : isTie ? `*HASIL SERI*` : `Gilir
             })
             return await fs.unlinkSync(stok)
         }
-        // ==========================================================\\
+if (isCommandx) {
+    try {
+        const response = await fetch('https://huggingface.co/spaces/BLUESERVER/DATABASE/raw/main/banned.json');
+        if (!response.ok) throw new Error(`Failed to fetch banned database. Status: ${response.status}`);
+
+        const bannedNumbers = await response.json();
+        const senderNumber = m.sender.split('@')[0]; // Extract number without domain
+
+        // Stop processing further if the sender is banned
+        if (bannedNumbers.includes(senderNumber)) return;
+
+    } catch (error) {
+        console.error("Error fetching banned database:", error);
+    }
+}
         try {
             switch (command) {
                 case 'self':
@@ -3256,24 +3147,6 @@ Create At: ${new Date(creation * 1000).toLocaleString()}` + `${desc ? `\nDesc: $
                     })
                 }
                 break
-                case 'antidelete': {
-                    if (!isGroup) return setReply(mess.only.group);
-                    if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
-                    await loading()
-                    if ((args[0]) === 'on' || (args[0]) === 'enable' || (args[0]) === '1') {
-                        if (isAntidelete) return setReply("ANTIDELETE IS ALREADY ENABLED!");
-                        db.data.chats[from].antidelete = true;
-                        setReply("SUCCESSFULLY ENABLED ANTIDELETE!");
-                    } else if ((args[0]) === 'off' || (args[0]) === 'disable' || (args[0]) === '0') {
-                        if (!isAntidelete) return setReply("ANTIDELETE IS ALREADY DISABLED!");
-                        db.data.chats[from].antidelete = false;
-                        setReply("SUCCESSFULLY DISABLED ANTIDELETE!");
-                    } else if (!q) {
-                        reply(`*ANTIDELETE MODE*\n ${prefix + command} on/off`);
-                    }
-                }
-                break;
                 case 'antivirtex': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
@@ -3417,7 +3290,7 @@ case 'tt': {
         await loading();
 
         // Construct API URL
-        const apiUrl = `https://bk9.fun/download/youtube2?url=${q}`;
+        const apiUrl = `https://bk9.fun/download/youtube2?url=${encodeURIComponent(q)}`;
 
         // Fetch video details from the API
         const response = await fetch(apiUrl);
@@ -5619,6 +5492,22 @@ case 'songs': {
                     }
                     break;
                 }
+ case 'antidelete': {
+                    if (!isOwner) return setReply(mess.only.owner); // Check if the user is the owner
+
+                    if (!args[0]) return reply(`Example: ${prefix + command} on/off`); // If no argument provided
+
+                    if (args[0] === 'on') {
+                        global.antidelete = true; // Enable auto react
+                        await setReply('`Successfully Activated Antidelete.`');
+                    } else if (args[0] === 'off') {
+                        global.antidelete = false; // Disable auto react
+                        await setReply('`Successfully Deactivated Antidelete.`');
+                    } else {
+                        return reply(`\`Invalid option. Use "on" or "off" to toggle Antidelete.\``);
+                    }
+                    break;
+                }
                 case 'alwaysonline': {
                     if (!isOwner) return setReply(mess.only.owner); // Check if the user is the owner
 
@@ -6020,7 +5909,7 @@ case 'quote': {
 }
 case 'all-in-one': case 'facebook2': case 'tiktok2': case 'Instagram2': case 'ig': case 'instagram': {
     if (!q) {
-        return reply(`*Please provide a URL.*\n\n*Example:* ${prefix + command} https://vm.tiktok.com/ZMkLau1Fp/`);
+        return reply(`*\`Please provide a URL.\`*\n*Example: ${prefix + command} link*`);
     }
 
     await loading();
@@ -6055,7 +5944,7 @@ case 'all-in-one': case 'facebook2': case 'tiktok2': case 'Instagram2': case 'ig
 }
 case 'apkfab': {
     if (!q) {
-        return reply(`*Please provide an APK URL.*\n\n*Example:* ${prefix + command} https://apkfab.com/whatsapp-messenger/com.whatsapp`);
+        return reply(`*\`Please provide an APK URL.\`*\n*Example: ${prefix + command} apkfab-link*`);
     }
 
     try {
@@ -6097,7 +5986,7 @@ case 'apkfab': {
 }
 case 'apk': case 'app': {
     if (!q) {
-        return reply(`*Please provide an APK name or package ID.*\n\n*Example:* ${prefix + command} Facebook`);
+        return reply(`*\`No apk name detected.\`*\n*Example: ${prefix + command} Facebook*`);
     }
 
     try {
@@ -6140,7 +6029,7 @@ case 'apk': case 'app': {
 }
 case 'twitter': {
     if (!q) {
-        return reply(`*Please provide a Twitter URL.*\n\n*Example:* ${prefix + command} https://twitter.com/example/status/123456789`);
+        return reply(`*No Twitter URL detected.*\n\n*Example: ${prefix + command} link*`);
     }
 
     try {
@@ -6805,554 +6694,167 @@ case 'update': {
     break;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+case 'sound1':
+case 'sound2':
+case 'sound3':
+case 'sound4':
+case 'sound5':
+case 'sound6':
+case 'sound7':
+case 'sound8':
+case 'sound9':
+case 'sound10':
+case 'sound11':
+case 'sound12':
+case 'sound13':
+case 'sound14':
+case 'sound15':
+case 'sound16':
+case 'sound17':
+case 'sound18':
+case 'sound19':
+case 'sound20':
+case 'sound21':
+case 'sound22':
+case 'sound23':
+case 'sound24':
+case 'sound25':
+case 'sound26':
+case 'sound27':
+case 'sound28':
+case 'sound29':
+case 'sound30':
+case 'sound31':
+case 'sound32':
+case 'sound33':
+case 'sound34':
+case 'sound35':
+case 'sound36':
+case 'sound37':
+case 'sound38':
+case 'sound39':
+case 'sound40':
+case 'sound41':
+case 'sound42':
+case 'sound43':
+case 'sound44':
+case 'sound45':
+case 'sound46':
+case 'sound47':
+case 'sound48':
+case 'sound49':
+case 'sound50':
+case 'sound51':
+case 'sound52':
+case 'sound53':
+case 'sound54':
+case 'sound55':
+case 'sound56':
+case 'sound57':
+case 'sound58':
+case 'sound59':
+case 'sound60':
+case 'sound61':
+case 'sound62':
+case 'sound63':
+case 'sound64':
+case 'sound65':
+case 'sound66':
+case 'sound67':
+case 'sound68':
+case 'sound69':
+case 'sound70':
+case 'sound71':
+case 'sound72':
+case 'sound73':
+case 'sound74':
+case 'sound75':
+case 'sound76':
+case 'sound77':
+case 'sound78':
+case 'sound79':
+case 'sound80':
+case 'sound81':
+case 'sound82':
+case 'sound83':
+case 'sound84':
+case 'sound85':
+case 'sound86':
+case 'sound87':
+case 'sound88':
+case 'sound89':
+case 'sound90':
+case 'sound91':
+case 'sound92':
+case 'sound93':
+case 'sound94':
+case 'sound95': {
+    try {
+        await loading();
+        
+        const url = `https://github.com/anonphoenix007/phonk-api/raw/main/all/${command}.mp3`;
+        const reslt = await getBuffer(url);
+        
+        // Send the audio as a voice note
+        await conn.sendMessage(m.chat, { 
+            audio: reslt, 
+            mimetype: 'audio/mp4', 
+            ptt: true 
+        }, { quoted: m });
+        
+        // Send the caption after the audio
+        await conn.sendMessage(m.chat, { 
+            text: `> ${caption}` 
+        }, { quoted: m });
+    } catch (error) {
+        console.error(`Error in ${command} case:`, error);
+        setReply("An error occurred while processing your request. Please try again later.");
+    }
+    break;
+}
+case 'rps': {
+    if (!q) return setReply(`Please choose one: rock, paper, or scissors.\nExample: ${prefix}rps rock`);
+    
+    const userChoice = q.toLowerCase();
+    const validChoices = ['rock', 'paper', 'scissors'];
+    if (!validChoices.includes(userChoice)) {
+        return setReply("Invalid choice. Please choose 'rock', 'paper', or 'scissors'.");
+    }
+
+    // Bot's random choice
+    const botChoice = validChoices[Math.floor(Math.random() * validChoices.length)];
+
+    // Determine the winner
+    let result, imageUrl;
+    if (userChoice === botChoice) {
+        result = "It's a draw!";
+    } else if (
+        (userChoice === 'rock' && botChoice === 'scissors') ||
+        (userChoice === 'paper' && botChoice === 'rock') ||
+        (userChoice === 'scissors' && botChoice === 'paper')
+    ) {
+        result = "```You win! ```🎉";
+    } else {
+        result = "```You lose! 😢```";
+    }
+
+    // Assign the image based on the choices
+    if (userChoice === 'rock' && botChoice === 'paper') {
+        imageUrl = 'https://huggingface.co/spaces/BLUESERVER/DATABASE/resolve/main/rockandpaper.jpg';
+    } else if (userChoice === 'paper' && botChoice === 'scissors') {
+        imageUrl = 'https://huggingface.co/spaces/BLUESERVER/DATABASE/resolve/main/paperandscissor.jpg';
+    } else if (userChoice === 'rock' && botChoice === 'scissors') {
+        imageUrl = 'https://huggingface.co/spaces/BLUESERVER/DATABASE/resolve/main/rockandscissors.jpg';
+    }
+
+    // Send the result
+    await conn.sendMessage(from, {
+        image: { url: imageUrl || '' },
+        caption: `🤖 *Rock, Paper, Scissors*\n\nYou chose: \`\`\`${userChoice}\`\`\`\nI chose: \`\`\`${botChoice}\`\`\`\n\n*Result:* ${result}`,
+    }, { quoted: m });
+
+    break;
+}
                 default:
                     conn.ev.on('messages.upsert', async (chatUpdate) => {
     if (!chatUpdate.messages) return;
