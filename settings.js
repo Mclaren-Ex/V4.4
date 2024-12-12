@@ -16,6 +16,8 @@ global.public = true
 
 global.autoreact = false
 
+global.antidelete = false
+
 global.autotyping = false
 
 global.autoBio = true
