@@ -1,8 +1,8 @@
 const version = require("@whiskeysockets/baileys/package.json").version
 //Input number for pair code
-global.pairingNumber = "2347042259025"
+global.pairingNumber = "2349019529423"
 
-global.botNumber = ["2347042259025"]
+global.botNumber = ["2349019529423"]
 
 global.anticall = false
 
@@ -28,9 +28,9 @@ global.sign = "〆"
 // ☞ ➻ ➽ ☛ 〆 
 global.bank = "Opay"
 
-global.bankname = "Richard Elijah"
+global.bankname = "BLUE"
 
-global.accnumber = "7042259025"
+global.accnumber = "7041039367"
 
 global.language = "en"
 global.sessionName = "session"
