@@ -4586,7 +4586,7 @@ case 'songs': {
                         for (const group of groups) {
                             try {
                                 await conn.sendMessage(group.id, {
-                                    text: `📣 *BROADCAST MESSAGE:* 📣\n\n*Message* ☛ \`\`\`${text}\`\`\`\n\n> *BY* ${botName}`
+                                    text: `📣 *BROADCAST MESSAGE:* 📣\n\n*Message* ☛ \`\`\`${text}\`\`\`\n\n> ${caption}`
                                 });
                                 successCount++;
                                 await sleep(1000); // Optional delay to avoid rate-limiting
