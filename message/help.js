@@ -96,14 +96,14 @@ exports.allmenu = (limitCount, isPremium, publik, sender, prefix, pushname) => {
         // Safely retrieve the user's balance
         const saldo = db?.data?.users?.[sender]?.balance?.toLocaleString() || '0';
         return Ehztext(`
-       *『 \`𝘽𝙇𝙐𝙀 𝙓 𝘿𝙀𝙈𝙊𝙉\` 』*
-> ■ 𝙽𝙰𝙼𝙴  :  ${pushname}
-> ■ 𝚂𝚃𝙰𝚃𝚄𝚂 :  ${isPremium ? '𝙿𝚛𝚎𝚖𝚒𝚞𝚖' : '𝙵𝚛𝚎𝚎'}
-> ■ 𝙼𝙾𝙳𝙴 : ${publik ? '𝙿𝚞𝚋𝚕𝚒𝚌' : '𝚂𝚎𝚕𝚏'}
-> ■ 𝙿𝚁𝙴𝙵𝙸𝚇 : ${prefix}
-> ■ 𝚁𝚄𝙽 𝙸𝙽 : ${runWith} 
-> ■ 𝙳𝙰𝚃𝙴 :  *${calender}*
-> ■ 𝚃𝙸𝙼𝙴 :  *${timeWib}*
+ 🎄 *『 \`𝘽𝙇𝙐𝙀 𝙓 𝘿𝙀𝙈𝙊𝙉\` 』* 🎄
+> 🎅 𝙽𝙰𝙼𝙴  :  ${pushname}
+> 🎅 𝚂𝚃𝙰𝚃𝚄𝚂 :  ${isPremium ? '𝙿𝚛𝚎𝚖𝚒𝚞𝚖' : '𝙵𝚛𝚎𝚎'}
+> 🎅 𝙼𝙾𝙳𝙴 : ${publik ? '𝙿𝚞𝚋𝚕𝚒𝚌' : '𝚂𝚎𝚕𝚏'}
+> 🎅 𝙿𝚁𝙴𝙵𝙸𝚇 : ${prefix}
+> 🎅 𝚁𝚄𝙽 𝙸𝙽 : ${runWith} 
+> 🎅 𝙳𝙰𝚃𝙴 :  *${calender}*
+> 🎅 𝚃𝙸𝙼𝙴 :  *${timeWib}*
  ${readmore}`);
     } catch (error) {
         console.error('Error in allmenu:', error);
@@ -242,6 +242,7 @@ exports.fitur = (prefix) => {
 ┇*${sign} shortlink*
 ┇*${sign} tinyurl*
 ┇*${sign} ssweb*
+┇*${sign} get*
 ┗─────────────❐
 
 ┏─『 \`𝐅𝐔𝐍 𝐌𝐄𝐍𝐔\` 』
