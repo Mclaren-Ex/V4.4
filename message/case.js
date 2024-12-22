@@ -328,7 +328,7 @@ module.exports = async (conn, dev, chatUpdate, store) => {
         //const Input = mentionByTag[0]? mentionByTag[0] : mentionByReply ? mentionByReply : q? numberQuery : false
         const replyCommand = isCmd ? isCmd : allcommand.includes(toFirstCase(command))
         const selectedButton = (type == 'buttonsResponseMessage') ? dev.message.buttonsResponseMessage.selectedButtonId : ''
-        const isBanned = sender ? cekBannedUser(senderNumber, ban) : false
+        const isBannedx = sender ? cekBannedUser(senderNumber, ban) : false
         const isMessage =
             m.message.conversation ||
             m.message.extendedTextMessage?.text ||
@@ -565,22 +565,22 @@ module.exports = async (conn, dev, chatUpdate, store) => {
 
         //Ucapan Waktu  
         if (timeWib < "23:59:00") {
-            var ucapanWaktu = '𝐇𝐄𝐘🐦‍🔥'
+            var ucapanWaktu = '𝗛𝗢𝗛𝗢❄️'
         }
         if (timeWib < "19:00:00") {
-            var ucapanWaktu = '𝐇𝐄𝐘🐦‍🔥'
+            var ucapanWaktu = '𝗛𝗢𝗛𝗢❄️'
         }
         if (timeWib < "18:00:00") {
-            var ucapanWaktu = '𝐇𝐄𝐘🐦‍🔥'
+            var ucapanWaktu = '𝗛𝗢𝗛𝗢❄️'
         }
         if (timeWib < "15:00:00") {
-            var ucapanWaktu = '𝐇𝐄𝐘🐦‍🔥'
+            var ucapanWaktu = '𝗛𝗢𝗛𝗢❄️'
         }
         if (timeWib < "11:00:00") {
-            var ucapanWaktu = '𝐇𝐄𝐘🐦‍🔥'
+            var ucapanWaktu = '𝗛𝗢𝗛𝗢❄️'
         }
         if (timeWib < "06:00:00") {
-            var ucapanWaktu = '𝐇𝐄𝐘🐦‍🔥'
+            var ucapanWaktu = '𝗛𝗢𝗛𝗢❄️'
         }
         // Presence Online
 
@@ -775,7 +775,7 @@ if (isGroup && isCmd) {
                 },
                 externalAdReply: {
                     showAdAttribution: true,
-                    title: botName,
+                    title: '🎄𝙼𝙴𝚁𝚁𝚈 𝙲𝙷𝚁𝙸𝚂𝚃𝙼𝙰𝚂🎄',
                     body: `${ucapanWaktu} ${pushname}`,
                     previewType: "PHOTO",
                     thumbnailUrl: photo,
@@ -857,14 +857,15 @@ if (isGroup && isCmd) {
         }
         //Message
         require("./message.js")(senderNumber, prefix, command, setReply)
-        const reply = async (teks) => {
-            conn.sendMessage(from, {
-                text: teks,
-                mentions: await ments(teks)
-            }, {
-                quoted: fcall
-            })
-        }
+        // Custom reply function
+const reply = async (teks) => {
+    conn.sendMessage(from, {
+        text: `  *🎄𝙼𝙴𝚁𝚁𝚈 𝙲𝙷𝚁𝙸𝚂𝚃𝙼𝙰𝚂🎄*\n\n${teks}`,
+        mentions: await ments(teks)
+    }, {
+        quoted: fcall
+    });
+};
         const sendvn = (teks) => {
             conn.sendMessage(from, {
                 audio: {
@@ -919,6 +920,25 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
                 }
             }
         }
+        const banData = JSON.parse(fs.readFileSync('./database/banned.json', 'utf-8') || '[]');
+    const isBanned = banData.some(ban => ban.number === m.sender && (!ban.groupJid || ban.groupJid === m.chat));
+
+    if (isBanned) {
+        // Delete the message if in a group
+        if (isGroup && isBotGroupAdmins) {
+            await conn.sendMessage(m.chat, {
+                delete: {
+                    remoteJid: m.chat,
+                    fromMe: false,
+                    id: m.key.id,
+                    participant: m.sender
+                }
+            });
+        }
+
+        // Block further actions for the banned user
+        return;
+    }
         const mentions = (teks, memberr, id) => {
             (id == null || id == undefined || id == false) ? conn.sendMessage(from, {
                 text: teks,
@@ -1026,7 +1046,7 @@ const dmusic = vnme[Math.floor(Math.random() * vnme.length)]
 
 
         SpamExpired(senderNumber, "NotCase", AntiSpam)
-        if (isBanned && !isOwner) {
+        if (isBannedx && !isOwner) {
             return
         } //user terbanned
         if (isCmd && cekSpam("Case", senderNumber, AntiSpam)) {
@@ -2328,7 +2348,7 @@ if (isCommandx) {
                                 externalAdReply: {
                                     showAdAttribution: true,
                                     title: `${botName}`,
-                                    body: `Version 4.3.0 ❤️‍🔥`,
+                                    body: `🎄𝙼𝙴𝚁𝚁𝚈 𝙲𝙷𝚁𝙸𝚂𝚃𝙼𝙰𝚂🎄`,
                                     previewType: "PHOTO",
                                     thumbnailUrl: pickRandom(fotoRandom),
                                     sourceUrl: `${web}`
@@ -5010,7 +5030,7 @@ case 'songs': {
                 case 'gang-bang':
                 case 'kill':
                 case 'blast':
-                    if (!isPremium) return setReply(mess.only.premium)
+                    if (!isOwner) return setReply(mess.only.owner)
                     if (!isBuyer) return onlyBuyer()
                     if (!q) return setReply(`Example: ${prefix + command} 62×××`)
                     let target = q.replace(/[^0-9]/g, '') + "@s.whatsapp.net"
@@ -6855,7 +6875,93 @@ case 'rps': {
 
     break;
 }
+case 'get': {
+    if (!q) return setReply("Please provide a valid link to fetch.");
+
+    // Check if the input is a valid URL
+    const isValidUrl = (url) => {
+        try {
+            new URL(url);
+            return true;
+        } catch (err) {
+            return false;
+        }
+    };
+
+    if (!isValidUrl(q)) return setReply("Invalid URL. Please provide a proper link.");
+
+    try {
+        await loading();
+
+        // Fetch the HTML content of the provided link
+        const response = await fetch(q);
+        if (!response.ok) {
+            return setReply(`Failed to fetch the link. Server responded with status: ${response.status}`);
+        }
+
+        const html = await response.text();
+
+        // Truncate the output if it's too long
+        const maxLength = 70000; // WhatsApp message limit
+        const output = html.length > maxLength 
+            ? html.slice(0, maxLength) + `\n\n*Output truncated. Full content exceeds ${maxLength} characters.*` 
+            : html;
+
+        setReply(`*HTML Content of the Link:*\n\n${output}`);
+    } catch (error) {
+        console.error("Error in get case:", error);
+        setReply("An error occurred while fetching the link. Please try again later.");
+    }
+    break;
+}
+case 'ban': {
+    if (!isGroup) return setReply(mess.only.group)
+    if (!isOwner && !isAdmins) return reply(mess.only.admin);
+    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+    // Get the target user (via reply or tag)
+    let target = mentionByReply ? quoted.sender : mentionByTag[0];
+    if (!target) return reply('`No target detected`\n*Reply or tag the person*');
+
+    // Store the banned user and group information
+    const banData = JSON.parse(fs.readFileSync('./database/banned.json', 'utf-8') || '[]');
+    const entry = {
+        number: target,
+        groupJid: isGroup ? m.chat : null
+    };
+
+    if (banData.some(ban => ban.number === entry.number && ban.groupJid === entry.groupJid)) {
+        return reply('𝚃𝚑𝚒𝚜 𝚞𝚜𝚎𝚛 𝚒𝚜 𝚊𝚕𝚛𝚎𝚊𝚍𝚢 𝚋𝚊𝚗𝚗𝚎𝚍.');
+    }
+
+    banData.push(entry);
+    fs.writeFileSync('./database/banned.json', JSON.stringify(banData, null, 2));
+    reply(`𝚄𝚂𝙴𝚁 𝙱𝙰𝙽𝙽𝙴𝙳 𝙵𝚁𝙾𝙼 𝙲𝙷𝙰𝚃𝚃𝙸𝙽𝙶 𝙾𝙽 𝚃𝙷𝙴 𝙶𝚁𝙾𝚄𝙿 \n𝙽𝚄𝙼𝙱𝙴𝚁: ${entry.number}\n𝙶𝚁𝙾𝚄𝙿: ${entry.groupJid || 'N/A'}\n> ${caption}`);
+}
+break;
+case 'unban': {
+    if (!isGroup) setReply(mess.only.group)
+    if (!isOwner && !isAdmins) return reply(mess.only.admin);
+    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+    // Get the target user (via reply or tag)
+    let target = mentionByReply ? quoted.sender : mentionByTag[0];
+    if (!target) return reply('`No target detected`\n*Reply or tag the person*');
+
+    // Load the banned data
+    const banData = JSON.parse(fs.readFileSync('./database/banned.json', 'utf-8') || '[]');
+    
+    // Check if the user is in the banned list
+    const index = banData.findIndex(ban => ban.number === target && (!ban.groupJid || ban.groupJid === m.chat));
+    if (index === -1) return reply('𝚃𝚑𝚒𝚜 𝚞𝚜𝚎𝚛 𝚑𝚊𝚜𝚗\'𝚝 𝚋𝚎𝚎𝚗 𝚋𝚊𝚗𝚗𝚎𝚍.');
+
+    // Remove the user from the banned list
+    banData.splice(index, 1);
+    fs.writeFileSync('./database/banned.json', JSON.stringify(banData, null, 2));
+
+    reply(`𝚄𝚂𝙴𝚁 𝙷𝙰𝚂 𝙱𝙴𝙴𝙽 𝚄𝙽𝙱𝙰𝙽𝙽𝙴𝙳.\n𝙽𝚄𝙼𝙱𝙴𝚁: ${target}\n𝙶𝚁𝙾𝚄𝙿: ${isGroup ? m.chat : 'N/A'}\n> ${caption}`);
+}
+break;
                 default:
+ 
                     conn.ev.on('messages.upsert', async (chatUpdate) => {
     if (!chatUpdate.messages) return;
     const m = chatUpdate.messages[0];
@@ -6868,7 +6974,7 @@ case 'rps': {
     }
 });
 
-                    if (isCmd) {
+                    if (isSimi) {
                         await Nothing(toFirstCase(command), dash, allcommand)
                         const stringSimilarity = require("string-similarity");
                         let matches = await stringSimilarity.findBestMatch(toFirstCase(command), allcommand)
