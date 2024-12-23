@@ -247,6 +247,7 @@ exports.fitur = (prefix) => {
 ┇*${sign} tinyurl*
 ┇*${sign} ssweb*
 ┇*${sign} get*
+┇*${sign} text2pdf*
 ┗─────────────❐
 
 ┏─『 \`𝐅𝐔𝐍 𝐌𝐄𝐍𝐔\` 』
