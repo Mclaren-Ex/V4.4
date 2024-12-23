@@ -2758,7 +2758,7 @@ if (isCommandx) {
 }
                 case 'add': {
                     if (!isGroup) return setReply(mess.only.group);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
                     if (!isGroupAdmins && !isOwner) return setReply(mess.only.admin);
                     await loading()
                     // Get the number from args or the replied message
@@ -2893,7 +2893,7 @@ if (isCommandx) {
                 break;
                 case 'promote':
                     if (!isGroup && !isGroupAdmins) return setReply(mess.only.group)
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
                     await loading()
                     let blockwwwww = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : q.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
                     await conn.groupParticipantsUpdate(m.chat, [blockwwwww], 'promote')
@@ -2901,7 +2901,7 @@ if (isCommandx) {
                     break
                 case 'demote':
                     if (!isGroup && !isGroupAdmins) return setReply(mess.only.group)
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
                     await loading()
                     let blockwwwwwa = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : q.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
                     await conn.groupParticipantsUpdate(m.chat, [blockwwwwwa], 'demote')
@@ -2992,7 +2992,7 @@ ${_meta.desc}`
                 case 'setppgc': {
                     if (!isGroup) return setReply(mess.only.group)
                     if (!isGroupAdmins) return setReply(mess.only.admin)
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
                     await loading()
                     if (isImage || isQuotedImage) {
                         let media = await conn.downloadAndSaveMediaMessage(quoted, makeid(5))
@@ -3029,7 +3029,7 @@ ${_meta.desc}`
                 case 'delppgc': {
                     if (!isGroup) return setReply(mess.only.group)
                     if (!isGroupAdmins) return setReply(mess.only.admin)
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
                     await loading()
                     await conn.removeProfilePicture(from)
                 }
@@ -3038,7 +3038,7 @@ ${_meta.desc}`
                 case 'setgcname': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
                     if (!q || q.trim().length === 0) return setReply(`Usage: ${command} <new group name>`);
 
                     await conn.groupUpdateSubject(from, q)
@@ -3054,7 +3054,7 @@ ${_meta.desc}`
                 case 'setdesc': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
                     if (!q || q.trim().length === 0) return setReply(`Usage: ${command} <new group description>`);
 
                     await conn.groupUpdateDescription(from, q)
@@ -3094,7 +3094,7 @@ Create At: ${new Date(creation * 1000).toLocaleString()}` + `${desc ? `\nDesc: $
                 case 'resetgclink': {
                     if (!isGroup) return setReply(mess.only.group)
                     if (!isOwner && !isGroupAdmins) return setReply(mess.only.admin)
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
                     conn.groupRevokeInvite(from)
                 }
                 break
@@ -3102,7 +3102,7 @@ Create At: ${new Date(creation * 1000).toLocaleString()}` + `${desc ? `\nDesc: $
                 case 'opentime': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
 
                     if (args[1] == "seconds") {
                         var timer = args[0] * `1000`;
@@ -3128,7 +3128,7 @@ Create At: ${new Date(creation * 1000).toLocaleString()}` + `${desc ? `\nDesc: $
                 case 'closetime': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
 
                     if (args[1] == "seconds") {
                         var timer = args[0] * `1000`;
@@ -3160,7 +3160,7 @@ Create At: ${new Date(creation * 1000).toLocaleString()}` + `${desc ? `\nDesc: $
                 case 'gclink': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
                     let response = await conn.groupInviteCode(from)
                     conn.sendText(from, `https://chat.whatsapp.com/${response}\n\n${themeemoji} *Group link: ${groupMetadata.subject}*`, m, {
                         detectLink: true
@@ -3170,7 +3170,7 @@ Create At: ${new Date(creation * 1000).toLocaleString()}` + `${desc ? `\nDesc: $
                 case 'antivirtex': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
                     await loading()
                     const mode = args[0]?.toLowerCase(); // Normalize input for case-insensitivity
 
@@ -3190,7 +3190,7 @@ Create At: ${new Date(creation * 1000).toLocaleString()}` + `${desc ? `\nDesc: $
                 case 'antibot': {
                     if (!isGroup) return setReply(mess.only.group);
                     if (!isGroupAdmins) return setReply(mess.only.admin);
-                    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+                    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
                     await loading()
                     const mode = args[0]?.toLowerCase(); // Normalize input for case-insensitivity
                     if (!mode || !["on", "off"].includes(mode)) {
@@ -5580,7 +5580,7 @@ case 'songs': {
                 }
 case 'invite': {
     if (!isGroup) return setReply(mess.only.group);
-    if (!isBotGroupAdmins) return setReply(mess.only.badmin);
+    if (!isBotGroupAdmins) return setReply(mess.only.Badmin);
     if (!text) return reply(`\`No WhatsApp number detected.\`\n*Example: ${prefix + command} 255734980103*`);
     if (text.includes('+')) return reply(`\`Input the WhatsApp number without *+*\``);
     if (isNaN(text)) return reply(`Please enter only numbers, including your country code, without spaces.`);
@@ -6916,8 +6916,9 @@ case 'get': {
 }
 case 'ban': {
     if (!isGroup) return setReply(mess.only.group)
-    if (!isOwner && !isAdmins) return reply(mess.only.admin);
-    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+    if (!isOwner && !isAdmins) return setReply(mess.only.admin);
+    if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
+    await loading();
     // Get the target user (via reply or tag)
     let target = mentionByReply ? quoted.sender : mentionByTag[0];
     if (!target) return reply('`No target detected`\n*Reply or tag the person*');
@@ -6940,8 +6941,9 @@ case 'ban': {
 break;
 case 'unban': {
     if (!isGroup) setReply(mess.only.group)
-    if (!isOwner && !isAdmins) return reply(mess.only.admin);
-    if (!isBotGroupAdmins) return setReply(mess.only.badmin)
+    if (!isOwner && !isAdmins) return setReply(mess.only.admin);
+    if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
+    await loading();
     // Get the target user (via reply or tag)
     let target = mentionByReply ? quoted.sender : mentionByTag[0];
     if (!target) return reply('`No target detected`\n*Reply or tag the person*');
