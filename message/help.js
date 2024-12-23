@@ -237,6 +237,7 @@ exports.fitur = (prefix) => {
 ┇*${sign} tiktokstalk*
 ┇*${sign} freefirestalk*
 ┇*${sign} npmcheck*
+┇*${sign} checkip*
 ┗─────────────❐
 
 ┏─『 \`𝐀𝐃𝐕𝐀𝐍𝐂𝐄 𝐓𝐎𝐎𝐋𝐒\` 』

@@ -6645,75 +6645,56 @@ case 'cecan-mal': {
     }
     break;
 }
-case 'update-case.js': {
-    if (!isOwner) return reply(mess.only.owner);
-    await loading();
-
-    reply("*𝐔𝐏𝐃𝐀𝐓𝐈𝐍𝐆.....*");
-
-    const fileToUpdate = {
-        url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/case.js',
-        path: './message/case.js',
-        name: 'case.js'
-    };
-
-    try {
-        const fs = require('fs');
-
-        const response = await fetch(fileToUpdate.url);
-        if (!response.ok) {
-            return reply(`Failed to update *${fileToUpdate.name}*. Server responded with ${response.status}.`);
-        }
-
-        const newContent = await response.text();
-        fs.writeFileSync(fileToUpdate.path, newContent, 'utf8');
-        reply(`*${fileToUpdate.name}* successfully updated.`);
-        await sleep(700);
-        reply('𝐔𝐏𝐃𝐀𝐓𝐄 𝐏𝐑𝐎𝐂𝐄𝐒𝐒 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐄.');
-    } catch (error) {
-        console.error("Error during update:", error);
-        reply("Failed to update the file. Please check the console for errors.");
-    }
-
-    break;
-}
-case 'update-help.js': {
-    if (!isOwner) return reply(mess.only.owner);
-    await loading();
-
-    reply("*𝐔𝐏𝐃𝐀𝐓𝐈𝐍𝐆.....*");
-
-    const fileToUpdate = {
-        url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/help.js',
-        path: './message/help.js',
-        name: 'help.js'
-    };
-
-    try {
-        const fs = require('fs');
-
-        const response = await fetch(fileToUpdate.url);
-        if (!response.ok) {
-            return reply(`Failed to update *${fileToUpdate.name}*. Server responded with ${response.status}.`);
-        }
-
-        const newContent = await response.text();
-        fs.writeFileSync(fileToUpdate.path, newContent, 'utf8');
-        reply(`*${fileToUpdate.name}* successfully updated.`);
-        await sleep(700);
-        reply('𝐔𝐏𝐃𝐀𝐓𝐄 𝐏𝐑𝐎𝐂𝐄𝐒𝐒 𝐂𝐎𝐌𝐏𝐋𝐄𝐓𝐄.');
-    } catch (error) {
-        console.error("Error during update:", error);
-        reply("Failed to update the file. Please check the console for errors.");
-    }
-
-    break;
-}
 case 'update': {
-    setReply(` 『 \`𝐔𝐏𝐃𝐀𝐓𝐄 𝐂𝐌𝐃𝐒\` 』\n${sign} 𝚄𝚙𝚍𝚊𝚝𝚎-𝙲𝚊𝚜𝚎.𝚓𝚜\n${sign} 𝚄𝚙𝚍𝚊𝚝𝚎-𝙷𝚎𝚕𝚙.𝚓𝚜`);
+    if (!isOwner) return reply(mess.only.owner);
+    await loading();
+
+    const filesToUpdate = [
+        {
+            url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/case.js',
+            path: './message/case.js',
+            name: 'case.js'
+        },
+        {
+            url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/help.js',
+            path: './message/help.js',
+            name: 'help.js'
+        },
+        {
+            url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/settings.js',
+            path: './settings.js',
+            name: 'settings.js'
+        },
+        {
+            url: 'https://huggingface.co/spaces/BACKUPSERVER/UPDATE/raw/main/message.js',
+            path: './message/message.js',
+            name: 'message.js'
+        }
+    ];
+
+    reply("*𝐔𝐏𝐃𝐀𝐓𝐈𝐍𝐆*");
+
+    try {
+        const fs = require('fs');
+        for (const file of filesToUpdate) {
+            const response = await fetch(file.url);
+            if (!response.ok) {
+                reply(`Failed to update *${file.name}*. Server responded with ${response.status}.`);
+                continue;
+            }
+
+            const newContent = await response.text();
+            fs.writeFileSync(file.path, newContent, 'utf8');
+            reply(`*${file.name}* successfully updated.`);
+        }
+        await sleep(700);
+        reply('𝐀𝐋𝐋 𝐅𝐈𝐋𝐄𝐒 𝐔𝐏𝐃𝐀𝐓𝐄𝐃 𝐒𝐔𝐂𝐂𝐄𝐒𝐒𝐅𝐔𝐋𝐋𝐘.');
+    } catch (error) {
+        console.error("Error during update:", error);
+        reply("Failed to update files. Please check the console for errors.");
+    }
     break;
 }
-
 case 'sound1':
 case 'sound2':
 case 'sound3':
@@ -6914,7 +6895,7 @@ case 'get': {
     }
     break;
 }
-case 'ban': {
+case 'ban': case 'suspend': {
     if (!isGroup) return setReply(mess.only.group)
     if (!isOwner && !isAdmins) return setReply(mess.only.admin);
     if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
@@ -6939,7 +6920,7 @@ case 'ban': {
     reply(`𝚄𝚂𝙴𝚁 𝙱𝙰𝙽𝙽𝙴𝙳 𝙵𝚁𝙾𝙼 𝙲𝙷𝙰𝚃𝚃𝙸𝙽𝙶 𝙾𝙽 𝚃𝙷𝙴 𝙶𝚁𝙾𝚄𝙿 \n𝙽𝚄𝙼𝙱𝙴𝚁: ${entry.number}\n𝙶𝚁𝙾𝚄𝙿: ${entry.groupJid || 'N/A'}\n> ${caption}`);
 }
 break;
-case 'unban': {
+case 'unban': case 'unsuspend': {
     if (!isGroup) setReply(mess.only.group)
     if (!isOwner && !isAdmins) return setReply(mess.only.admin);
     if (!isBotGroupAdmins) return setReply(mess.only.Badmin)
@@ -6962,6 +6943,35 @@ case 'unban': {
     reply(`𝚄𝚂𝙴𝚁 𝙷𝙰𝚂 𝙱𝙴𝙴𝙽 𝚄𝙽𝙱𝙰𝙽𝙽𝙴𝙳.\n𝙽𝚄𝙼𝙱𝙴𝚁: ${target}\n𝙶𝚁𝙾𝚄𝙿: ${isGroup ? m.chat : 'N/A'}\n> ${caption}`);
 }
 break;
+case 'text2pdf': {
+    if (!q) return setReply(`\`No text detected\`\n*Example:  ${prefix + command} text*`);
+
+    try {
+        await loading();
+
+        // Construct the API URL
+        const apiUrl = `https://bk9.fun/tools/pdf?q=${encodeURIComponent(q)}`;
+
+        // Fetch the PDF response
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error(`Failed to fetch PDF. Status: ${response.status}`);
+
+        const buffer = await response.buffer();
+
+        // Send the generated PDF
+        await conn.sendMessage(m.chat, {
+            document: buffer,
+            mimetype: 'application/pdf',
+            fileName: 'text2pdf.pdf',
+            caption: `Here is your PDF file for the provided text.\n> ${caption}`
+        }, { quoted: m });
+
+    } catch (error) {
+        console.error("Error in text2pdf case:", error);
+        setReply("An error occurred while converting the text to a PDF. Please try again later.");
+    }
+    break;
+}
                 default:
  
                     conn.ev.on('messages.upsert', async (chatUpdate) => {
